@@ -1,19 +1,19 @@
 package main
 
 import (
-	"fmt"
 	"net/http"
 	"time"
+
+	"github.com/gin-gonic/gin"
 )
 
-func helloworld(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Hello World! Time : %s", time.Now().Format(time.RFC3339Nano))
+func helloworld(c *gin.Context) {
+	c.String(http.StatusOK, "Hello World! Time : %s", time.Now().Format(time.RFC3339Nano))
 }
 
 func main() {
-	http.HandleFunc("/", helloworld)
+	engine := gin.New()
+	engine.GET("/", helloworld)
 
-	fmt.Println("API ready !")
-	fmt.Println("Listening at : http://localhost:8080")
-	http.ListenAndServe(":8080", nil)
+	engine.Run("localhost:8080")
 }
