@@ -1,0 +1,161 @@
+{
+	"info": {
+		"_postman_id": "2f952921-7066-496e-87c8-803446d0e6ba",
+		"name": "ToDoList",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31611544"
+	},
+	"item": [
+		{
+			"name": "Get All tasks",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/tasks",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"tasks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a task",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"description\": \"Faire une API pour gérer sa todo list\",\n  \"status\": \"In Progress\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/task",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"task"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get a task with uuid",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/task/:task_uuid",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"task",
+						":task_uuid"
+					],
+					"variable": [
+						{
+							"key": "task_uuid",
+							"value": "9c14d1e8-7f34-4282-95fc-533c7088ff7d"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update a task with uuid",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"description\": \"Faire une API pour gérer sa todo list\",\n  \"status\": \"Done\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/task/:task_uuid",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"task",
+						":task_uuid"
+					],
+					"variable": [
+						{
+							"key": "task_uuid",
+							"value": "9c14d1e8-7f34-4282-95fc-533c7088ff7d"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a task with uuid",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/task/:task_uuid",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"task",
+						":task_uuid"
+					],
+					"variable": [
+						{
+							"key": "task_uuid",
+							"value": "ddd27771-e5dc-46b8-b902-ff06d5a5f761"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}
