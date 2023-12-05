@@ -1,0 +1,111 @@
+openapi: '3.0.2'
+info:
+  title: ToDoList API
+  version: '1.0'
+tags:
+  - name: task
+    description: All operation on task.
+paths:
+  /tasks:
+    get:
+      tags:
+        - "task"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: 
+                  $ref: '#/components/schemas/Task'
+        '400':
+          description: Bad Request
+  /task:
+    post:
+      tags:
+        - "task"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                description:
+                  type: string
+                status:
+                  type: string
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+        '400':
+          description: Bad Request
+  /task/{task_uuid}:
+    parameters:
+        - in: path
+          name: task_uuid
+          required: true
+          schema:
+            type: string
+    get:
+      tags:
+        - "task"
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+        '400':
+          description: Bad Request
+    put:
+      tags:
+        - "task"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                description:
+                  type: string
+                status:
+                  type: string
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+    delete:
+      tags:
+        - "task"
+      responses:
+        '204':
+          description: No Content
+        '400':
+          description: Bad Request
+  
+
+components:
+  schemas:
+    Task:
+      type: object
+      properties:
+        task_uuid:
+          type: string
+          format: uuid
+        description:
+          type: string
+        status:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        last_updated:
+          type: string
+          format: date-time       
