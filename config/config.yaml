@@ -1,0 +1,16 @@
+logger:
+  level: DEBUG #INFO
+  output:
+    - stdout
+
+controllers:
+  task_controller:
+    task_dao: 
+      type: TaskInMemoryDAO
+      connector: IM1
+
+ginrouters:
+  addr: ""
+  port: 8080
+  gin_mode: debug
+  shutdown_timeout: 5
