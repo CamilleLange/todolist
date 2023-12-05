@@ -4,8 +4,8 @@ A simple Go API to handle todo list.
 
 ## Build
 
-`go build`
+`make build`
 
 ## Run 
 
-`./todolist`
+`TASK_API_CONFIG=./config/ ./todolist`
