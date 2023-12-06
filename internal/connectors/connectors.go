@@ -1,8 +1,6 @@
 package connectors
 
 import (
-	"github.com/Aloe-Corporation/sqldb"
-
 	"github.com/Aloe-Corporation/logs"
 )
 
@@ -15,7 +13,6 @@ var (
 
 // Conf for the repositories package.
 type Conf struct {
-	MySQL map[string]sqldb.Conf `mapstructure:"mysql"`
 }
 
 // Init the data sources connectors.
