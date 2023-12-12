@@ -3,11 +3,17 @@ logger:
   output:
     - stdout
 
+connectors:
+  postgres:
+    PG1:
+      driver: postgres
+      dsn: "host=127.0.0.1 port=5432 user=todolist password=secretpwd dbname=todolist sslmode=disable"
+
 controllers:
   task_controller:
     task_dao: 
-      type: TaskInMemoryDAO
-      connector: IM1
+      type: TaskPostgresDAO
+      connector: pg1
 
 ginrouters:
   addr: ""

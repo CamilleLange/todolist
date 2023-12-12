@@ -1,6 +1,6 @@
 project_name:=$(shell grep "module " <go.mod | sed 's;.*/;;g')
 
-full: upd-vendor format lint deploy
+full: upd-vendor format lint 
 
 $(project_name):
 	go build -a -mod=vendor -o ./$(@)
@@ -23,4 +23,4 @@ godoc:
 	echo -e "Go to http://localhost:6060/internal/$(shell head -n 1 go.mod | cut -d" " -f2)?m=all\nPress Ctrl + C to exit"
 	godoc 
 
-.PHONY: full $(project_name) deploy down build format upd-vendor test lint godoc
+.PHONY: full $(project_name) build format upd-vendor test lint godoc

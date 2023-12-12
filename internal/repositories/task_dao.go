@@ -55,6 +55,8 @@ func FactoryTaskDAO(opt DAOFactoryOptions) (ITaskDAO, error) {
 		dao, err = factoryTaskVoidDAO(opt)
 	case TypeTaskInMemoryDAO:
 		dao, err = factoryTaskInMemoryDAO(opt)
+	case TypeTaskPostgresDAO:
+		dao, err = factoryTaskPostgresDAO(opt)
 	default:
 		return nil, &DAOTypeNotFoundError{Type: opt.Type}
 	}

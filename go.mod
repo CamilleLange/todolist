@@ -16,6 +16,12 @@ require (
 )
 
 require (
+	github.com/go-sql-driver/mysql v1.7.1 // indirect
+	github.com/lib/pq v1.10.9 // indirect
+)
+
+require (
+	github.com/Aloe-Corporation/sqldb v1.0.0
 	github.com/bytedance/sonic v1.10.2 // indirect
 	github.com/chenzhuoyu/base64x v0.0.0-20230717121745-296ad89f973d // indirect
 	github.com/chenzhuoyu/iasm v0.9.1 // indirect
