@@ -112,7 +112,7 @@ func (dao *TaskPostgresDAO) ReadAll(ctx context.Context) ([]*model.Task, error) 
 
 func (dao *TaskPostgresDAO) Update(ctx context.Context) error {
 	// Find the update data.
-	fieldsName, valuesToUpdate, taskUUID, err := getUpdateData(ctx)
+	fieldsName, valuesToUpdate, taskUUID, err := getUpdateDataFrom(ctx)
 	if err != nil {
 		return fmt.Errorf("can't get data for the update request from the context : %w", err)
 	}
@@ -165,28 +165,6 @@ func (dao *TaskPostgresDAO) Update(ctx context.Context) error {
 		return fmt.Errorf("can't commit the transaction : %w", err)
 	}
 	return nil
-}
-
-// getUpdateData search in the context and convert to the correct type all data needed to execute the update query
-func getUpdateData(ctx context.Context) ([]string, map[string]any, *uuid.UUID, error) {
-	strFieldsName := ctx.Value("task_fields_name")
-	fieldsName, castable := strFieldsName.([]string)
-	if !castable {
-		return nil, nil, nil, fmt.Errorf("can't cast the context value to *[]string")
-	}
-
-	strValuesToUpdate := ctx.Value("task_values_to_update")
-	valuesToUpdate, castable := strValuesToUpdate.(map[string]any)
-	if !castable {
-		return nil, nil, nil, fmt.Errorf("can't cast the context value to *map[string]any")
-	}
-
-	strUUID := ctx.Value("task_uuid")
-	taskUUID, castable := strUUID.(*uuid.UUID)
-	if !castable {
-		return nil, nil, nil, fmt.Errorf("can't cast the context value to *uuid.UUID")
-	}
-	return fieldsName, valuesToUpdate, taskUUID, nil
 }
 
 func (dao *TaskPostgresDAO) Delete(ctx context.Context) error {

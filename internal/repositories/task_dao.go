@@ -5,6 +5,7 @@ import (
 	"fmt"
 
 	model "github.com/CamilleLange/todolist/pkg/structs"
+	"github.com/google/uuid"
 )
 
 // mapTaskDAO is used by ProxyFactoryTaskDAO to store TaskDAO.
@@ -57,6 +58,8 @@ func FactoryTaskDAO(opt DAOFactoryOptions) (ITaskDAO, error) {
 		dao, err = factoryTaskInMemoryDAO(opt)
 	case TypeTaskPostgresDAO:
 		dao, err = factoryTaskPostgresDAO(opt)
+	case TypeTaskMongoDAO:
+		dao, err = factoryTaskMongoDAO(opt)
 	default:
 		return nil, &DAOTypeNotFoundError{Type: opt.Type}
 	}
@@ -66,4 +69,26 @@ func FactoryTaskDAO(opt DAOFactoryOptions) (ITaskDAO, error) {
 	}
 
 	return dao, nil
+}
+
+// getUpdateDataFrom search in the context and convert to the correct type all data needed to execute the update query
+func getUpdateDataFrom(ctx context.Context) ([]string, map[string]any, *uuid.UUID, error) {
+	strFieldsName := ctx.Value("task_fields_name")
+	fieldsName, castable := strFieldsName.([]string)
+	if !castable {
+		return nil, nil, nil, fmt.Errorf("can't cast the context value to *[]string")
+	}
+
+	strValuesToUpdate := ctx.Value("task_values_to_update")
+	valuesToUpdate, castable := strValuesToUpdate.(map[string]any)
+	if !castable {
+		return nil, nil, nil, fmt.Errorf("can't cast the context value to *map[string]any")
+	}
+
+	strUUID := ctx.Value("task_uuid")
+	taskUUID, castable := strUUID.(*uuid.UUID)
+	if !castable {
+		return nil, nil, nil, fmt.Errorf("can't cast the context value to *uuid.UUID")
+	}
+	return fieldsName, valuesToUpdate, taskUUID, nil
 }

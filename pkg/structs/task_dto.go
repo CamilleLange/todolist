@@ -7,11 +7,11 @@ import (
 )
 
 type Task struct {
-	UUID        uuid.UUID
-	WhatToDo    string
-	Status      string
-	CreatedAt   time.Time
-	LastUpdated time.Time
+	UUID        uuid.UUID `bson:"task_uuid,omitempty"`
+	WhatToDo    string    `bson:"description,omitempty"`
+	Status      string    `bson:"status,omitempty"`
+	CreatedAt   time.Time `bson:"created_at,omitempty"`
+	LastUpdated time.Time `bson:"last_updated,omitempty"`
 }
 
 type TaskPublicDTO struct {

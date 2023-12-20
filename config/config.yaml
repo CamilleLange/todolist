@@ -4,16 +4,25 @@ logger:
     - stdout
 
 connectors:
-  postgres:
-    PG1:
-      driver: postgres
-      dsn: "host=127.0.0.1 port=5432 user=todolist password=secretpwd dbname=todolist sslmode=disable"
+  mongo:
+    md1:
+        db: todolist
+        host: 127.0.0.1
+        port: 27017
+        username: todolist
+        password: secretpwd
+        timeout: 10
+
+  #postgres:
+  #  pg1:
+  #    driver: postgres
+  #    dsn: "host=127.0.0.1 port=5432 user=todolist password=secretpwd dbname=todolist sslmode=disable"
 
 controllers:
   task_controller:
     task_dao: 
-      type: TaskPostgresDAO
-      connector: pg1
+      type: TaskMongoDAO
+      connector: md1
 
 ginrouters:
   addr: ""
